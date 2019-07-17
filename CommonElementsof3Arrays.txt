@@ -1,0 +1,95 @@
+package hashing;
+import java.util.*;
+
+public class CommonElements {
+
+	public static void main(String[] args) {
+
+       Scanner s=new Scanner(System.in);
+       
+       System.out.println("enter t");
+       int t=s.nextInt();
+       while(t-- > 0)
+       {
+    	   int n1=s.nextInt();
+    	   int n2=s.nextInt();
+    	   int n3=s.nextInt();
+    	   
+    	   int[] arr1=new int[n1];
+    	   int[] arr2=new int[n2];
+    	   int[] arr3=new int[n3];
+    	   
+    	   //make hashsets to store elements uniquely
+    	   HashSet<Integer> hs1=new HashSet<>();
+    	   HashSet<Integer> hs2=new HashSet<>();
+    	   HashSet<Integer> hs3=new HashSet<>();
+    	   
+    	   for (int i = 0; i < arr1.length; i++) 
+    	   {
+			  arr1[i]=s.nextInt();
+			  hs1.add(arr1[i]);
+		   }
+    	   for (int i = 0; i < arr2.length; i++) 
+    	   {
+    		   arr2[i]=s.nextInt();
+    		   hs2.add(arr2[i]);
+		   }
+    	   for (int i = 0; i < arr3.length; i++) 
+    	   {
+    		   arr3[i]=s.nextInt();
+    		   hs3.add(arr3[i]);
+		   }
+    	   
+    	  HashMap<Integer,Integer> hm=new HashMap<>();
+    	  
+    	  Iterator<Integer> it1=hs1.iterator();
+    	  while(it1.hasNext())
+    	  {
+    		  int x=it1.next();
+    		  hm.put(x, 1);
+    	  }
+    	  Iterator<Integer> it2=hs2.iterator();
+    	  while(it2.hasNext())
+    	  {
+    		  int x=it2.next();
+    		  if(hm.containsKey(x))
+    			  hm.put(x, hm.get(x)+1);
+    		  else
+    			  hm.put(x, 1);
+    	  }
+    	  Iterator<Integer> it3=hs3.iterator();
+    	  while(it3.hasNext())
+    	  {
+    		  int x=it3.next();
+    		  if(hm.containsKey(x))
+    			  hm.put(x, hm.get(x)+1);
+    		  else
+    			  hm.put(x, 1);
+    	  }
+    	  
+    	  //finally iterate hashmap and print result
+    	  ArrayList<Integer> al=new ArrayList<>();
+    	  for(Integer i: hm.keySet())
+    	  {
+    		  if(hm.get(i) == 3)
+    		  {
+    			 al.add(i);
+    		  }
+    	  }
+    	  if(al.size()==0)
+    		  System.out.print("-1");
+    	  else
+    	  {
+    		  Collections.sort(al);
+    		  for (int i = 0; i < al.size(); i++)
+    		  {
+				 System.out.print(al.get(i)+" ");
+			  }
+    	  }
+    	  System.out.println();
+    	  
+       }
+
+	}
+
+}

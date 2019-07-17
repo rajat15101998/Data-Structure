@@ -1,0 +1,71 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class Merge2sortedArrays
+ {
+	public static void main (String[] args) throws Exception
+	 {
+	     try
+	     {
+	        InputStreamReader r=new InputStreamReader(System.in);    
+            BufferedReader br=new BufferedReader(r); 
+
+	        int t = Integer.parseInt(br.readLine());
+	     
+	         while(t-- >0)
+	       {
+	         int len1 = Integer.parseInt(br.readLine());
+	         int len2 = Integer.parseInt(br.readLine());
+
+	         String line1 = br.readLine(); // to read multiple integers line
+	         String line2 = br.readLine(); // to read multiple integers line
+             String[] strs1 = line1.trim().split("\\s+");
+             String[] strs2 = line2.trim().split("\\s+");
+
+	         int[] arr1=new int[len1];
+	         int[] arr2=new int[len2];
+
+             for(int l=0; l<len1; l++)
+	         {
+	         	arr1[l] = Integer.parseInt(strs1[l]);
+	         }
+
+	         for(int l=0; l<len2; l++)
+	         {
+	         	arr2[l] = Integer.parseInt(strs2[l]);
+	         }
+	         
+	         for(int i=len2-1; i>=0; i--)
+	         {
+	             int j=len1-1;
+	             int last=arr1[j];
+	             for(j=len1-2; j>=0 && arr2[i] < arr1[j]; j--)
+	             {
+	                 arr1[j+1]=arr1[j];
+	             }
+	             
+	             if(j!=len2-2)
+	             {
+	                 arr1[j+1]=arr2[i];
+	                 arr2[i]=last;
+	             }
+	         }
+	         
+	         for(int i=0; i<len1; i++)
+	         {
+	             System.out.print(arr1[i]+" ");
+	         }
+	         for(int i=0; i<len2; i++)
+	         {
+	             System.out.print(arr2[i]+" ");
+	         }
+	         
+	       }  
+	        
+	     }  
+	     catch (NumberFormatException e) {
+        
+         }
+	     
+	 }
+}
