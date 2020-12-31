@@ -1,0 +1,116 @@
+package hashing;
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class SortbyFrequency
+ {
+     // Function to sort by column
+	public static void sortbyColumn(int arr[][], int col)
+	{
+       // Using built-in sort function Arrays.sort
+	   Arrays.sort(arr, new Comparator<int[]>() {
+
+	   @Override
+
+	   // Compare values according to columns
+	   public int compare(final int[] entry1,
+
+	    final int[] entry2)
+	    {
+          // To sort in descending order revert
+          // the '>' Operator
+	      if (entry1[col] > entry2[col])
+	          return 1;
+	      else
+              return -1;
+        }
+
+	}); // End of function call sort().
+
+ }
+
+
+	public static void main (String[] args) throws Exception
+	 {
+	   try
+	   {
+          InputStreamReader r=new InputStreamReader(System.in);    
+          BufferedReader br=new BufferedReader(r); 
+
+          System.out.println("enter value of t");
+	      int t = Integer.parseInt(br.readLine());
+
+	      while(t-- > 0)
+	      {
+	      	 int n = Integer.parseInt(br.readLine());
+	      	 String line = br.readLine(); // to read multiple integers line
+	      	 String[] strs = line.trim().split("\\s+");
+
+	      	 int[] arr=new int[n];
+	      	 //take input for values
+             for(int i=0; i<n; i++)
+	         {
+	         	arr[i] = Integer.parseInt(strs[i]);
+	         }
+
+	         //write the logic here
+	         HashMap<Integer,Integer> hm=new HashMap<Integer,Integer>();
+	         for(int i=0; i<n; i++)
+	         {
+	         	if(hm.containsKey(arr[i]))
+	         		hm.put(arr[i], hm.get(arr[i]) + 1);
+	         	else
+	         		hm.put(arr[i], 1);
+	         }
+
+             //now put the value and key in a 2d array
+             int[][] result=new int[hm.size()][2];
+             int j=0;
+             for(Integer i: hm.keySet())
+             {
+            	 result[j][0]=i;
+            	 result[j][1]=hm.get(i);
+            	 j++;
+             }
+
+            //now sort this 2d array on the basis of frequency i.e column 1
+             int column=2;
+             sortbyColumn(result, column - 1);
+
+             //now print the array
+//             System.out.println("sorted 2-d array is:");
+//             for(int i=0; i<result.length; i++)
+//             {
+//                 for(int k=0; k<2; k++)
+//                 {
+//                   System.out.print(result[i][k]+" "); 
+//                 }
+//                System.out.println();
+//             }
+             
+             //print the result
+              for(int i=result.length-1; i>=0; i--)
+              {
+            	  int x=result[i][0];
+            	  int y=result[i][1];
+            	  for(int k=0; k<y; k++)
+            	  {
+            		  System.out.print(x+" ");
+            	  }
+              }
+              
+              System.out.println();
+
+	      } 
+
+	   }
+
+	   catch (NumberFormatException e) {
+        
+       }
+
+	 }
+
+}	   

@@ -1,0 +1,56 @@
+import java.util.*;
+
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+        
+        Scanner s = new Scanner(System.in);
+        System.out.println("enter n");
+        int n=s.nextInt();
+        int[] arr=new int[n];
+
+        //count no. of zeors,negative numbers,maximum_negative no.,min positive no.
+        int count_zero=0,count_neg=0;
+        int max_neg=Integer.MIN_VALUE;
+        int post_min=Integer.MAX_VALUE; 
+        int product=1;
+        for(int i=0; i<n; i++)
+        {
+          arr[i]=s.nextInt();
+
+          if(arr[i]==0)
+            count_zero++;
+          if(arr[i] < 0)
+            {
+              count_neg++;
+              max_neg=Math.max(max_neg,arr[i]);
+            }
+          if(arr[i] > 0)
+            {
+              post_min=Math.min(post_min,arr[i]);
+            } 
+          if(arr[i]!=0)
+             product=product*arr[i]; 
+
+        }
+          int ans=0;
+          if(n==1)
+            ans=arr[0];
+          else
+          {
+             if(count_zero==n || count_zero!=0 && count_neg==0)
+              ans=0;
+             else if(count_neg!=0)
+             {
+                if(count_neg%2==0)
+                   ans=product/max_neg;
+                 else
+                   ans=product;
+             }
+             else if(count_zero==0 && count_neg==0)
+              ans=post_min;
+          }
+           
+          System.out.println("Minimum product subset of an array="+ans);    
+
+    }
+}

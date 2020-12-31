@@ -1,0 +1,84 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+        
+	public static void main (String[] args)
+	 {
+	     Scanner s=new Scanner(System.in);
+	     int n=s.nextInt();
+	     int[] arr=new int[n];
+	     for(int i=0; i<n; i++)
+	     {
+	     	arr[i]=s.nextInt();
+	     }
+
+	     //next greater index on right of each element
+	     int[] nextgreaterright=new int[n];
+	     Stack<Integer> st=new Stack<Integer>();
+	     st.push(n);
+	     nextgreaterright[n-1]=0;
+
+	     for(int i=n-1; i>=1; i--)
+	     {
+	     	if(!st.isEmpty())
+	     	{
+	     		while(!st.isEmpty() && arr[i-1]>=arr[st.peek()-1])
+	     		{
+	     			st.pop();
+	     		}
+	     		nextgreaterright[i-1]=(st.isEmpty())?0:st.peek();
+	     		st.push(i);
+	     	}
+	     }
+	     
+	     System.out.println("next greater index on right of each element is:");
+	     for(int i=0; i<n; i++)
+	     {
+	     	System.out.print(nextgreaterright[i]+" ");
+	     }
+
+         System.out.println();
+         st.empty();
+	     //next greater index on left of each element
+	     int[] nextgreaterleft=new int[n];
+	     //Stack<Integer> st=new Stack<Integer>();
+	     st.push(1);
+	     nextgreaterleft[0]=0;
+
+	     for(int i=2; i<=n; i++)
+	     {
+	     	if(!st.isEmpty())
+	     	{
+	     		while(!st.isEmpty() && arr[i-1]>=arr[st.peek()-1])
+	     		{
+	     			st.pop();
+	     		}
+	     		nextgreaterleft[i-1]=(st.isEmpty())?0:st.peek();
+	     		st.push(i);
+	     	}
+	     }
+	     
+	     System.out.println("next greater index on left of each element is:");
+	     for(int i=0; i<n; i++)
+	     {
+	     	System.out.print(nextgreaterleft[i]+" ");
+	     }
+
+	     System.out.println();
+
+	     int max=0;
+	     for(int i=0; i<n; i++)
+	     {
+	     	int x=nextgreaterleft[i]*nextgreaterright[i];
+	     	if(x > max)
+	     		max=x;
+	     }
+
+	     System.out.println("maximum required product is:"+max);
+
+
+
+	 }
+}
