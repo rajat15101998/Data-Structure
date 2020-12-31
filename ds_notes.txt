@@ -1,0 +1,8 @@
+IMPORTANT NOTES
+
+1. The bubble sort is at its best if the input data is sorted. i.e. If the input data is sorted in the same order as expected output. This can be achieved by using one boolean variable. The boolean variable is used to check whether the values are swapped at least once in the inner loop.
+
+2.  Insertion sort is used when number of elements is small. It can also be useful when input array is almost sorted, only few elements are misplaced in complete big array.
+
+3. Insertion Sort: index 1 se element pick karo or uske aage wala array portion me uska sahi jagah dhoondo or wahan insert karo.
+
